@@ -20,7 +20,7 @@ for tweet in possible_tweets:
         nombre_completo_tag = tweet.find('div', attrs={'dir': 'ltr'})
         nombre_completo = nombre_completo_tag.text.strip() if nombre_completo_tag else 'Desconocido'
         
-        # Extraer la fecha
+        # Extraer la fecha y asignar 'nofecha' si está vacío
         fecha_tag = tweet.find('time')
         fecha = fecha_tag['datetime'] if fecha_tag else 'nofecha'
         
