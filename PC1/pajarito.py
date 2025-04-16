@@ -15,7 +15,7 @@ service = Service('D:\PYTHON\TWITTER\msedgedriver.exe')
 driver = webdriver.Edge(service=service, options=options)
 
 # Carga la página de inicio
-driver.get('https://x.com/search?q=congreso&src=recent_search_click&f=live')
+driver.get('https://x.com/search?q=%22Lilia%20Paredes%22&src=trend_click&vertical=trends')
 
 # Carga las cookies previamente guardadas
 cookies = pickle.load(open("cookies.pkl", "rb"))
@@ -23,7 +23,7 @@ for cookie in cookies:
     driver.add_cookie(cookie)
 
 # Vuelve a cargar la página para aplicar las cookies
-driver.get('https://x.com/search?q=congreso&src=recent_search_click&f=live')
+driver.get('https://x.com/search?q=%22Lilia%20Paredes%22&src=trend_click&vertical=trends')
 
 # Ahora deberías estar autenticado sin tener que iniciar sesión manualmente
 
