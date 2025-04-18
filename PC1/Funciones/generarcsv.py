@@ -1,6 +1,7 @@
 import csv
 from datetime import datetime
 import re
+import os
 
 def parse_number(value):
     """Convert string numbers with K/M suffix to actual numbers."""
@@ -78,7 +79,16 @@ def split_tweets(html_content):
     return tweets
 
 def process_tweet_file(input_file, output_file):
-    """Process the input file and generate a CSV file."""
+    """
+    Process the input file and generate a CSV file.
+    
+    Args:
+        input_file (str): Path to the input file containing tweet HTML or text
+        output_file (str): Path where to save the CSV output
+    """
+    # Ensure output directory exists
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
+    
     with open(output_file, 'w', newline='', encoding='utf-8') as csvfile:
         writer = csv.writer(csvfile)
         # Write headers
@@ -162,7 +172,9 @@ def process_tweet_file(input_file, output_file):
                         current_tweet.get('views', '')
                     ])
 
-input_file = 'pagina_contenido.txt'
-output_file = 'tweets.csv'
-process_tweet_file(input_file, output_file)
-print(f'CSV file has been generated successfully: {output_file}')
+if __name__ == "__main__":
+    # Example usage
+    input_file = '../Archivos/pagina_contenido.txt'
+    output_file = '../Archivos/tweets.csv'
+    process_tweet_file(input_file, output_file)
+    print(f'CSV file has been generated successfully: {output_file}')
