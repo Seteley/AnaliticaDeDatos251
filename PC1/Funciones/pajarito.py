@@ -4,6 +4,24 @@ from selenium.webdriver.edge.options import Options
 import pickle
 import time
 import os
+import random  # <- Importamos random para pausas aleatorias
+
+def scroll_suave(driver, pasos=5, pausa=0.1):
+    """
+    Desplaza hacia abajo la página en pequeños pasos.
+    
+    :param driver: Instancia del WebDriver
+    :param pasos: Número de mini-scrolls para llegar al fondo
+    :param pausa: Tiempo de espera entre cada paso (en segundos)
+    """
+    altura_total = driver.execute_script("return document.body.scrollHeight")
+    altura_actual = driver.execute_script("return window.scrollY")
+    incremento = (altura_total - altura_actual) / pasos
+
+    for i in range(pasos):
+        driver.execute_script(f"window.scrollBy(0, {incremento});")
+        time.sleep(pausa)
+
 
 def scrape_twitter(search_url, output_file):
     # Configura las opciones de EdgeDriver
@@ -32,10 +50,15 @@ def scrape_twitter(search_url, output_file):
 
     # Abre el archivo en modo append para agregar contenido progresivamente
     with open(output_file, "a", encoding="utf-8") as file:
-        for i in range(100):  # Número de miniscrolls
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-            time.sleep(1.5)  # Espera que cargue nuevo contenido
+        for i in range(500):  # Número de miniscrolls
+            scroll_suave(driver, pasos=20, pausa=0.2)  # Puedes ajustar los valores
 
+            # Pausa aleatoria entre 2.5 y 5 segundos
+            wait_time = random.uniform(0.5, 2)
+            print(f"Scroll #{i + 1}: esperando {wait_time:.2f} segundos...")
+            time.sleep(wait_time)
+
+            # Captura el contenido del body
             body_content = driver.find_element("tag name", "body").get_attribute('outerHTML')
 
             # Escribe el contenido del body con separación
