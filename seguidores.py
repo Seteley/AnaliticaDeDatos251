@@ -10,16 +10,19 @@ from selenium.webdriver.edge.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-def scrapear_usuario(nombre_usuario):
-    service = Service('D:\\PYTHON\\TWITTER\\msedgedriver.exe')  # Ajusta esta ruta si es necesario
-    options = webdriver.EdgeOptions()
-    # options.add_argument("--headless=new")
-    options.add_argument("window-size=1920,1080")
+# Configuración del EdgeDriver
+service = Service('D:\\PYTHON\\TWITTER\\msedgedriver.exe')  # Ajusta esta ruta si es necesario
+options = webdriver.EdgeOptions()
+#options.add_argument("--headless=new")  # Activa el modo headless
+options.add_argument("window-size=1920,1080")  # Asegura tamaño adecuado
+driver = webdriver.Edge(service=service, options=options)
 
-    driver = webdriver.Edge(service=service, options=options)
-    url = f"https://livecounts.io/twitter-live-follower-counter/{nombre_usuario}"
-    driver.get(url)
-    driver.execute_script("window.scrollBy(0, 300);")
+# URL del contador en vivo
+url = "https://livecounts.io/twitter-live-follower-counter/elonmusk"
+driver.get(url)
+
+# Hacer un pequeño scroll para asegurar carga de elementos
+driver.execute_script("window.scrollBy(0, 300);")
 
     archivo_csv = f"seguidores_{nombre_usuario}.csv"
     if not os.path.exists(archivo_csv):
