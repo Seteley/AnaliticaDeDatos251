@@ -9,14 +9,14 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 # Configuración del EdgeDriver
-service = Service('D:\\PYTHON\\TWITTER\\msedgedriver.exe')  # Ajusta esta ruta si es necesario
+service = Service('C:\\Users\\marzabe\\OneDrive\\Documentos\\edgedriver_win64\\msedgedriver.exe')  # Ajusta esta ruta si es necesario
 options = webdriver.EdgeOptions()
 #options.add_argument("--headless=new")  # Activa el modo headless
 options.add_argument("window-size=1920,1080")  # Asegura tamaño adecuado
 driver = webdriver.Edge(service=service, options=options)
 
 # URL del contador en vivo
-url = "https://livecounts.io/twitter-live-follower-counter/elonmusk"
+url = "https://livecounts.io/twitter-live-follower-counter/cristiano"
 driver.get(url)
 
 # Hacer un pequeño scroll para asegurar carga de elementos
