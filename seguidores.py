@@ -11,7 +11,7 @@ from selenium.webdriver.support import expected_conditions as EC
 # Configuración del EdgeDriver
 service = Service('D:\\PYTHON\\TWITTER\\msedgedriver.exe')  # Ajusta esta ruta si es necesario
 options = webdriver.EdgeOptions()
-options.add_argument("--headless=new")  # Activa el modo headless
+#options.add_argument("--headless=new")  # Activa el modo headless
 options.add_argument("window-size=1920,1080")  # Asegura tamaño adecuado
 driver = webdriver.Edge(service=service, options=options)
 
@@ -23,8 +23,10 @@ driver.get(url)
 driver.execute_script("window.scrollBy(0, 300);")
 
 
-# Archivo CSV
-archivo_csv = "seguidores_elon.csv"
+# Extraer nombre de usuario de la URL
+nombre_usuario = url.strip('/').split('/')[-1]
+archivo_csv = f"seguidores_{nombre_usuario}.csv"
+
 if not os.path.exists(archivo_csv):
     with open(archivo_csv, mode='w', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
