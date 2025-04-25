@@ -11,7 +11,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 def scrapear_usuario(nombre_usuario):
-    service = Service('D:\\PYTHON\\TWITTER\\msedgedriver.exe')  # Ajusta esta ruta si es necesario
+    service = Service('C:\\Users\\marzabe\\OneDrive\\Documentos\\edgedriver_win64\\msedgedriver.exe')  # Ajusta esta ruta si es necesario
     options = webdriver.EdgeOptions()
     # options.add_argument("--headless=new")
     options.add_argument("window-size=1920,1080")
