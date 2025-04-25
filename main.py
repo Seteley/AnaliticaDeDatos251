@@ -2,7 +2,7 @@ from multiprocessing import Process
 from seguidores import scrapear_usuario
 
 if __name__ == '__main__':
-    usuarios = ['elonmusk', 'canalN_', 'ClubSCristal']
+    usuarios = ['Libertadores', 'exitosape', 'larepublica_co']
     procesos = []
 
     for usuario in usuarios:
