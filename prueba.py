@@ -24,4 +24,4 @@ async def scrape_tweet(url: str) -> dict:
         return data['data']['user']['result']
 
 if __name__ == "__main__":
-    print(asyncio.run(scrape_tweet("https://x.com/Scrapfly_dev")))
+    print(asyncio.run(scrape_tweet("https://x.com/cristiano")))
