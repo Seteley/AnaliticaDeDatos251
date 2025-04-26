@@ -114,4 +114,4 @@ def limpiar_csv(nombre_csv):
     df.to_csv(nuevo_nombre, index=False)
     print(f"✅ Guardado como: {nuevo_nombre}")
 
-limpiar_csv("seguidores_canalN_.csv")
+limpiar_csv("../Seguidores/seguidores_clubaloficial.csv")
