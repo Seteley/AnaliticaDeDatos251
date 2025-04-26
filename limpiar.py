@@ -51,6 +51,7 @@ limpiar_csv("seguidores_elonmusk.csv")
 """
 
 
+
 import pandas as pd
 
 def limpiar_csv(nombre_csv):
@@ -71,7 +72,7 @@ def limpiar_csv(nombre_csv):
         eliminar_siguiente = False
         eliminar_actual = False
 
-        # Regla 2: si la fila siguiente tiene un salto mayor que la fila actual en cualquier campo
+        # Regla 2: salto brusco entre filas
         for campo in ['Seguidores', 'Tweets', 'Following', 'Goal']:
             if abs(fila_siguiente[campo] - fila_actual[campo]) > fila_actual[campo]:
                 eliminar_siguiente = True
@@ -87,17 +88,27 @@ def limpiar_csv(nombre_csv):
                     j += 1
                 if j < len(df) and df.loc[j][campo] > 10000:
                     eliminar_actual = True
-                    break  # Basta con que un campo cumpla para eliminar ese bloque
+                    break
 
         if eliminar_actual:
             df.drop(index=indices_para_eliminar, inplace=True)
             df.reset_index(drop=True, inplace=True)
-            # No incrementamos i, porque debemos revisar la nueva fila que quedó en la posición i
         elif eliminar_siguiente:
             df.drop(index=i + 1, inplace=True)
             df.reset_index(drop=True, inplace=True)
         else:
             i += 1
+
+    # Regla 4: si el último registro tiene 0 y el anterior un valor alto, eliminar el último
+    if len(df) >= 2:
+        ultima = df.loc[len(df) - 1]
+        penultima = df.loc[len(df) - 2]
+        for campo in ['Seguidores', 'Tweets', 'Following', 'Goal']:
+            if ultima[campo] == 0 and penultima[campo] > 10000:
+                df.drop(index=len(df) - 1, inplace=True)
+                df.reset_index(drop=True, inplace=True)
+                print(f"⚠️ Última fila eliminada por Regla 4 en campo '{campo}'")
+                break
 
     nuevo_nombre = nombre_csv.replace('.csv', '_limpio.csv')
     df.to_csv(nuevo_nombre, index=False)
