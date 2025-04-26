@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Cargar el archivo limpio
-df = pd.read_csv("seguidores_elonmusk_limpio.csv", parse_dates=["Hora"])
+df = pd.read_csv("seguidores_canalN__limpio.csv", parse_dates=["Hora"])
 
 # -----------------------------
 # Dimensiones y tipos de datos

@@ -79,4 +79,4 @@ def graficar_serie_seguidores(hora_inicio, hora_fin, nombre_csv):
     plt.show()
 
 
-graficar_serie_seguidores("2025-04-24 13:14:27", "2025-04-24 23:13:04", "seguidores_Cristiano_limpio.csv")
+graficar_serie_seguidores("2025-04-24 12:41:07", "2025-04-25 22:38:11", "seguidores_canalN__limpio.csv")
