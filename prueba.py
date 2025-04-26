@@ -44,4 +44,4 @@ async def loop_scrape(username: str):
         await asyncio.sleep(10)
 
 if __name__ == "__main__":
-    asyncio.run(loop_scrape("ClubSCristal"))
+    print(asyncio.run(scrape_tweet("https://x.com/Scrapfly_dev")))
